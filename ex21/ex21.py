@@ -48,12 +48,9 @@ def bs_dllist(num, a_ordered_dllist):
 def _bs_dllist(num, a_ordered_dllist, start ,end):
     # contain start & end
     length = end - start + 1
-    if length == 1:
-        value = a_ordered_dllist.find_by_index(start).value
-        return value == num and num or None
-
     mid = (start + end) // 2
     mid_value = a_ordered_dllist.find_by_index(mid).value
+    
     if mid_value == num:
         return num
     elif mid_value > num:
