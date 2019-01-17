@@ -24,11 +24,8 @@ def test_bs_dllist():
     num = 55
     for i in range(0, 10):
         a_dllist = ordered_dllist()
-        a_dllist.dump()
-        message = bs_dllist(num, a_dllist)
-        a_dllist.dump()
-        print(message)
-        if num in a_dllist.dump('silence'):
+        the_dllist = a_dllist.dump('silence')
+        if num in the_dllist:
             result = num
         else:
             result = None

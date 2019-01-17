@@ -41,21 +41,9 @@ def ordered_dllist():
     quick_sort(a_dllist)
     return a_dllist
 
-def copy_dllist(a_dllist, start, end):
-    if start == None:
-        start = 0
-    if end == None:
-        end = a_dllist.count() - 1
-    a_copy = DLList()
-    a_copy.begin = a_dllist.find_by_index(start)
-    a_copy.begin.prev = None
-    a_copy.end = a_dllist.find_by_index(end)
-    a_copy.end.next = None
-    return a_copy
-
 def bs_dllist(num, a_ordered_dllist):
     length = a_ordered_dllist.count()
-    _bs_dllist(num, a_ordered_dllist, 0, length - 1)
+    return _bs_dllist(num, a_ordered_dllist, 0, length - 1)
 
 def _bs_dllist(num, a_ordered_dllist, start ,end):
     # contain start & end
@@ -64,16 +52,20 @@ def _bs_dllist(num, a_ordered_dllist, start ,end):
         value = a_ordered_dllist.find_by_index(start).value
         return value == num and num or None
 
-    mid = length // 2
+    mid = (start + end) // 2
     mid_value = a_ordered_dllist.find_by_index(mid).value
     if mid_value == num:
         return num
     elif mid_value > num:
 
-        return _bs_dllist(num, a_ordered_dllist, start, mid-1)
+        if start <= mid - 1:
+            return _bs_dllist(num, a_ordered_dllist, start, mid-1)
+        else:
+            return None
+
     else:
 
-        if a_ordered_dllist.find_by_index(mid+1):
+        if mid + 1 <= end:
             return _bs_dllist(num, a_ordered_dllist, mid+1, end)
         else:
             return None
