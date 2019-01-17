@@ -55,8 +55,14 @@ def copy_dllist(a_dllist, start, end):
 
 def bs_dllist(num, a_ordered_dllist):
     length = a_ordered_dllist.count()
+    _bs_dllist(num, a_ordered_dllist, 0, length - 1)
+
+def _bs_dllist(num, a_ordered_dllist, start ,end):
+    # contain start & end
+    length = end - start + 1
     if length == 1:
-        return a_ordered_dllist.begin.value == num and num or None
+        value = a_ordered_dllist.find_by_index(start).value
+        return value == num and num or None
 
     mid = length // 2
     mid_value = a_ordered_dllist.find_by_index(mid).value
@@ -64,10 +70,10 @@ def bs_dllist(num, a_ordered_dllist):
         return num
     elif mid_value > num:
 
-        return bs_dllist(num, copy_dllist(a_ordered_dllist, None, mid-1))
+        return _bs_dllist(num, a_ordered_dllist, start, mid-1)
     else:
 
         if a_ordered_dllist.find_by_index(mid+1):
-            return bs_dllist(num, copy_dllist(a_ordered_dllist, mid+1, None))
+            return _bs_dllist(num, a_ordered_dllist, mid+1, end)
         else:
             return None
